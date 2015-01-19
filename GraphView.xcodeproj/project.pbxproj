@@ -14,6 +14,7 @@
 		35EAAE271A6D7B9A00B1825E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35EAAE261A6D7B9A00B1825E /* Images.xcassets */; };
 		35EAAE2A1A6D7B9A00B1825E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35EAAE281A6D7B9A00B1825E /* LaunchScreen.xib */; };
 		35EAAE361A6D7B9A00B1825E /* GraphViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 35EAAE351A6D7B9A00B1825E /* GraphViewTests.m */; };
+		35EAAE421A6D7C0600B1825E /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35EAAE411A6D7C0600B1825E /* GraphView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		35EAAE2F1A6D7B9A00B1825E /* GraphViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GraphViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		35EAAE341A6D7B9A00B1825E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		35EAAE351A6D7B9A00B1825E /* GraphViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphViewTests.m; sourceTree = "<group>"; };
+		35EAAE401A6D7C0600B1825E /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
+		35EAAE411A6D7C0600B1825E /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,7 @@
 		35EAAE181A6D7B9A00B1825E /* GraphView */ = {
 			isa = PBXGroup;
 			children = (
+				35EAAE3F1A6D7BAC00B1825E /* GraphView component */,
 				35EAAE1D1A6D7B9A00B1825E /* AppDelegate.h */,
 				35EAAE1E1A6D7B9A00B1825E /* AppDelegate.m */,
 				35EAAE201A6D7B9A00B1825E /* ViewController.h */,
@@ -117,6 +121,16 @@
 				35EAAE341A6D7B9A00B1825E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		35EAAE3F1A6D7BAC00B1825E /* GraphView component */ = {
+			isa = PBXGroup;
+			children = (
+				35EAAE401A6D7C0600B1825E /* GraphView.h */,
+				35EAAE411A6D7C0600B1825E /* GraphView.m */,
+			);
+			name = "GraphView component";
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -222,6 +236,7 @@
 				35EAAE221A6D7B9A00B1825E /* ViewController.m in Sources */,
 				35EAAE1F1A6D7B9A00B1825E /* AppDelegate.m in Sources */,
 				35EAAE1C1A6D7B9A00B1825E /* main.m in Sources */,
+				35EAAE421A6D7C0600B1825E /* GraphView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
