@@ -52,15 +52,9 @@ static NSInteger const kBaseTag = 1041;
     self = [super init];
     if (self) {
         self.translatesAutoresizingMaskIntoConstraints = NO;
-        _largestNodeSize = CGSizeMake(44.0f, 44.0f);
-    }
-    return self;
-}
-
--(instancetype)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:frame];
-    if (self) {
-        _largestNodeSize = CGSizeMake(90.0f, 90.0f);
+        _largestNodeSize = CGSizeMake(100.0f, 100.0f);
+        _connectionLineWidth = 3.0f;
+        _connectionColor = [UIColor blueColor];
     }
     return self;
 }
@@ -81,7 +75,7 @@ static NSInteger const kBaseTag = 1041;
         _nodeViews[node.key] = nodeView;
         
         if (_largestNode) {
-            _largestNode = node.size < _largestNode.size ? node : _largestNode;
+            _largestNode = node.size > _largestNode.size ? node : _largestNode;
         } else {
             _largestNode = node;
         }
@@ -136,8 +130,8 @@ static NSInteger const kBaseTag = 1041;
 
 -(void) drawConnections {
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextSetStrokeColorWithColor(ctx, [UIColor blueColor].CGColor);
-    CGContextSetLineWidth(ctx, 3.0f);
+    CGContextSetStrokeColorWithColor(ctx, self.connectionColor.CGColor);
+    CGContextSetLineWidth(ctx, self.connectionLineWidth);
     NSInteger nodeCount = [self.delegate numberOfNodesInGraphView:self];
     for (NSInteger n = 0; n < nodeCount; ++n) {
         id<GraphNode> node = [self.graph nodeAtIndex:n];
