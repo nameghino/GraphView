@@ -79,6 +79,8 @@
     [super viewDidLoad];
     GraphView *gv = [[GraphView alloc] init];
     gv.backgroundColor = [UIColor whiteColor];
+    gv.connectionColor = [UIColor redColor];
+    
     _graphView = gv;
     UIView *subview = gv;
 #if USE_SCROLLVIEW
