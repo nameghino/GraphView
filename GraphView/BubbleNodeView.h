@@ -10,4 +10,7 @@
 
 @interface BubbleNodeView : GraphNodeView
 
+@property(nonatomic, strong) UIColor *strokeColor;
+@property(nonatomic, strong) UIColor *fillColor;
+
 @end

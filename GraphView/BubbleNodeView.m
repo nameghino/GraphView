@@ -12,10 +12,12 @@
 
 - (void)drawRect:(CGRect)rect {
     CGContextRef ctx = UIGraphicsGetCurrentContext();
-    CGContextSetFillColorWithColor(ctx, [UIColor clearColor].CGColor);
-    CGContextSetStrokeColorWithColor(ctx, [UIColor redColor].CGColor);
+    CGContextSetFillColorWithColor(ctx, self.fillColor.CGColor);
+    CGContextSetStrokeColorWithColor(ctx, self.strokeColor.CGColor);
     CGContextSetLineWidth(ctx, 2.0f);
-    CGContextStrokeEllipseInRect(ctx, CGRectInset(rect, 4.0f, 4.0f));
+    CGRect nodeRect = CGRectInset(rect, 4.0f, 4.0f);
+    CGContextFillEllipseInRect(ctx, nodeRect);
+    CGContextStrokeEllipseInRect(ctx, nodeRect);
     
     UIFont *font = [UIFont boldSystemFontOfSize:14.0f];
     NSDictionary *attributes = @{NSFontAttributeName: font, NSForegroundColorAttributeName: [UIColor blackColor]};
