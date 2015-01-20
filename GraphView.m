@@ -66,6 +66,7 @@ static NSInteger const kBaseTag = 1041;
     for (NSInteger n = 0; n < nodeCount; ++n) {
         id<GraphNode> node = [self.graph nodeAtIndex:n];
         GraphNodeView *nodeView = [self.delegate graphView:self viewForNode:node];
+        nodeView.graphView = self;
         nodeView.tag = kBaseTag + n;
         [self addSubview:nodeView];
         _nodeViews[node.key] = nodeView;

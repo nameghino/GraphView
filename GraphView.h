@@ -21,8 +21,10 @@
 -(id<GraphNode>) nodeForKey:(NSString *) key;
 @end
 
+@class GraphView;
 @interface GraphNodeView : UIView
 @property(nonatomic, strong) id<GraphNode> node;
+@property(nonatomic, weak) GraphView *graphView;
 @end
 
 @class GraphView, GraphNodeView;
