@@ -11,6 +11,8 @@
 @protocol GraphNode <NSObject>
 @property(nonatomic, strong, readonly) NSString *key;
 @property(nonatomic, assign, readonly) NSInteger outDegree;
+@property(nonatomic, assign, readonly) CGFloat size;
+@property(nonatomic, strong, readonly) NSArray *outConnections;
 @end
 
 @protocol Graph <NSObject>
@@ -18,15 +20,15 @@
 -(id<GraphNode>) nodeAtIndex:(NSInteger) index;
 @end
 
+@interface GraphNodeView : UIView
+@property(nonatomic, strong) id<GraphNode> node;
+@end
 
 @class GraphView, GraphNodeView;
 @protocol GraphViewDelegate <NSObject>
 -(NSInteger) numberOfNodesInGraphView:(GraphView *)graphView;
 -(NSString *) keyForFirstNodeInGraphView:(GraphView *)graphView;
 -(GraphNodeView *) graphView:(GraphView *)graphView viewForNode:(id<GraphNode>) node;
-@end
-
-@interface GraphNodeView : UIView
 @end
 
 @protocol Graph, GraphNode;
