@@ -73,21 +73,39 @@
 
 @implementation ViewController
 
+#define USE_SCROLLVIEW 0
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     GraphView *gv = [[GraphView alloc] init];
-    [self.view addSubview:gv];
-    NSDictionary *views = NSDictionaryOfVariableBindings(gv);
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[gv]|"
+    gv.backgroundColor = [UIColor whiteColor];
+    _graphView = gv;
+    UIView *subview = gv;
+#if USE_SCROLLVIEW
+    UIScrollView *scrollView = [[UIScrollView alloc] init];
+    subview = scrollView;
+    [scrollView addSubview:gv];
+    scrollView.contentSize = CGSizeMake(1000, 1000); //TODO: WTF?
+#endif
+    [self.view addSubview:subview];
+#if USE_SCROLLVIEW
+    gv.frame = scrollView.bounds;
+#endif
+    
+    NSDictionary *views = NSDictionaryOfVariableBindings(subview);
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[subview]|"
                                                                       options:NSLayoutFormatAlignAllCenterY
                                                                       metrics:nil
                                                                         views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[gv]|"
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[subview]|"
                                                                       options:NSLayoutFormatAlignAllCenterX
                                                                       metrics:nil
                                                                         views:views]];
-    _graphView = gv;
+    
+
+
+    
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -99,8 +117,6 @@
 
 
 -(id<Graph>) createGraph {
-    
-    
     TestNode *aNode = [TestNode nodeWithKey:@"A"];
     TestNode *bNode = [TestNode nodeWithKey:@"B"];
     TestNode *cNode = [TestNode nodeWithKey:@"C"];
@@ -148,8 +164,9 @@
 
 -(GraphNodeView *)graphView:(GraphView *)graphView viewForNode:(id<GraphNode>)node {
     //TODO: add GraphNodeView reuse
-    GraphNodeView *nodeView = [[BubbleNodeView alloc] init];
-    nodeView.backgroundColor = [UIColor clearColor];
+    BubbleNodeView *nodeView = [[BubbleNodeView alloc] init];
+    nodeView.strokeColor = [UIColor blueColor];
+    nodeView.fillColor = graphView.backgroundColor;
     nodeView.node = node;
     return nodeView;
 }
