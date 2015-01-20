@@ -15,6 +15,7 @@
 		35EAAE2A1A6D7B9A00B1825E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35EAAE281A6D7B9A00B1825E /* LaunchScreen.xib */; };
 		35EAAE361A6D7B9A00B1825E /* GraphViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 35EAAE351A6D7B9A00B1825E /* GraphViewTests.m */; };
 		35EAAE421A6D7C0600B1825E /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35EAAE411A6D7C0600B1825E /* GraphView.m */; };
+		35EAAE451A6EDB3400B1825E /* BubbleNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35EAAE441A6EDB3400B1825E /* BubbleNodeView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		35EAAE351A6D7B9A00B1825E /* GraphViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphViewTests.m; sourceTree = "<group>"; };
 		35EAAE401A6D7C0600B1825E /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
 		35EAAE411A6D7C0600B1825E /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
+		35EAAE431A6EDB3400B1825E /* BubbleNodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubbleNodeView.h; sourceTree = "<group>"; };
+		35EAAE441A6EDB3400B1825E /* BubbleNodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BubbleNodeView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +96,8 @@
 				35EAAE261A6D7B9A00B1825E /* Images.xcassets */,
 				35EAAE281A6D7B9A00B1825E /* LaunchScreen.xib */,
 				35EAAE191A6D7B9A00B1825E /* Supporting Files */,
+				35EAAE431A6EDB3400B1825E /* BubbleNodeView.h */,
+				35EAAE441A6EDB3400B1825E /* BubbleNodeView.m */,
 			);
 			path = GraphView;
 			sourceTree = "<group>";
@@ -236,6 +241,7 @@
 				35EAAE221A6D7B9A00B1825E /* ViewController.m in Sources */,
 				35EAAE1F1A6D7B9A00B1825E /* AppDelegate.m in Sources */,
 				35EAAE1C1A6D7B9A00B1825E /* main.m in Sources */,
+				35EAAE451A6EDB3400B1825E /* BubbleNodeView.m in Sources */,
 				35EAAE421A6D7C0600B1825E /* GraphView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
