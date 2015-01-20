@@ -37,7 +37,7 @@
 @interface TestNode : NSObject <GraphNode>
 @property(nonatomic, assign) CGFloat size;
 @property(nonatomic, strong, readonly) NSString *key;
-@property(nonatomic, strong, readonly) NSArray *outConnections;
+@property(nonatomic, strong) NSArray *outConnections;
 @end
 
 @implementation TestNode
@@ -64,6 +64,11 @@
     _outConnections = [_outConnections arrayByAddingObject:target.key];
 }
 
+-(NSString *)description {
+    NSMutableString *s = [NSMutableString stringWithFormat: @"Node %@ (%f) - [%@]", self.key, self.size, [self.outConnections componentsJoinedByString:@","]];
+    return s;
+}
+
 @end
 
 @interface ViewController () <GraphViewDelegate>
@@ -80,6 +85,7 @@
     GraphView *gv = [[GraphView alloc] init];
     gv.backgroundColor = [UIColor whiteColor];
     gv.connectionColor = [UIColor redColor];
+    gv.largestNodeSize = CGSizeMake(150, 150);
     
     _graphView = gv;
     UIView *subview = gv;
@@ -104,8 +110,8 @@
                                                                       metrics:nil
                                                                         views:views]];
     
-
-
+    
+    
     
     
 }
@@ -118,32 +124,51 @@
 }
 
 
--(id<Graph>) createGraph {
-    TestNode *aNode = [TestNode nodeWithKey:@"A"];
-    TestNode *bNode = [TestNode nodeWithKey:@"B"];
-    TestNode *cNode = [TestNode nodeWithKey:@"C"];
-    TestNode *dNode = [TestNode nodeWithKey:@"D"];
-    TestNode *eNode = [TestNode nodeWithKey:@"E"];
-    TestNode *fNode = [TestNode nodeWithKey:@"F"];
+static NSString * const kNodeKey = @"NodeKey";
+static NSString * const kSizeKey = @"SizeKey";
+static NSString * const kConnectionsKey = @"ConnectionsKey";
 
-    NSArray *nodeArray = @[aNode, bNode, cNode, dNode, eNode, fNode];
+-(id<Graph>) createGraph {
     
-    aNode.size = 30.0f;
-    cNode.size = 5.0f;
-    eNode.size = 20.0f;
-    fNode.size = 15.0f;
+    NSMutableDictionary *index = [NSMutableDictionary dictionary];
+    for (int i=0; i < 27; ++i) {
+        char key = 'A' + i;
+        NSString *keyString = [NSString stringWithFormat:@"%c", key];
+        TestNode *node = [TestNode nodeWithKey:keyString];
+        index[keyString] = node;
+    }
+    
+    CGFloat stdSize = 240;
+    CGFloat multi1 = 3;
+    CGFloat multi2 = 0.5;
     
     
-    [aNode connectToNode:bNode];
-    [aNode connectToNode:cNode];
-    [bNode connectToNode:dNode];
-    [bNode connectToNode:eNode];
-    [cNode connectToNode:fNode];
+    NSArray *usedNodes = @[
+                           @{kNodeKey: @"A", kSizeKey: @(stdSize * multi1), kConnectionsKey: @[@"B", @"C", @"D"]},
+                           @{kNodeKey: @"B", kSizeKey: @(stdSize), kConnectionsKey: @[@"E", @"F", @"G"]},
+                           @{kNodeKey: @"C", kSizeKey: @(stdSize), kConnectionsKey: @[@"H", @"I", @"J"]},
+                           @{kNodeKey: @"D", kSizeKey: @(stdSize), kConnectionsKey: @[@"K", @"L", @"M"]},
+                           @{kNodeKey: @"E", kSizeKey: @(stdSize * multi2), kConnectionsKey: @[]},
+                           @{kNodeKey: @"F", kSizeKey: @(stdSize * multi2) , kConnectionsKey: @[]},
+                           @{kNodeKey: @"G", kSizeKey: @(stdSize * multi2), kConnectionsKey: @[]},
+                           @{kNodeKey: @"H", kSizeKey: @(stdSize * multi2), kConnectionsKey: @[]},
+                           @{kNodeKey: @"I", kSizeKey: @(stdSize * multi2) , kConnectionsKey: @[]},
+                           @{kNodeKey: @"J", kSizeKey: @(stdSize * multi2), kConnectionsKey: @[]},
+                           @{kNodeKey: @"K", kSizeKey: @(stdSize * multi2), kConnectionsKey: @[]},
+                           @{kNodeKey: @"L", kSizeKey: @(stdSize * multi2) , kConnectionsKey: @[]},
+                           @{kNodeKey: @"M", kSizeKey: @(stdSize * multi2), kConnectionsKey: @[]},
+                           ];
+    
+    
     
     TestGraph *graph = [[TestGraph alloc] init];
     NSMutableDictionary *d = [NSMutableDictionary dictionary];
-    [nodeArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        d[[obj key]] = obj;
+    [usedNodes enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
+        TestNode *node = index[obj[kNodeKey]];
+        node.size = [obj[kSizeKey] floatValue];
+        node.outConnections = obj[kConnectionsKey];
+        d[node.key] = node;
+        NSLog(@"using node:\n%@", node);
     }];
     graph.nodeIndex = d;
     
