@@ -16,7 +16,16 @@
     CGContextSetStrokeColorWithColor(ctx, [UIColor redColor].CGColor);
     CGContextSetLineWidth(ctx, 2.0f);
     CGContextStrokeEllipseInRect(ctx, CGRectInset(rect, 4.0f, 4.0f));
-    [self.node.key drawInRect:rect withAttributes:nil];
+    
+    UIFont *font = [UIFont boldSystemFontOfSize:14.0f];
+    NSDictionary *attributes = @{NSFontAttributeName: font, NSForegroundColorAttributeName: [UIColor blackColor]};
+    
+    CGSize labelSize = [self.node.key sizeWithAttributes:attributes];
+    CGPoint labelOrigin = CGPointMake((rect.size.width - labelSize.width) /2.0f,
+                                      (rect.size.height - labelSize.height) / 2.0f);
+    
+    CGRect labelRect = (CGRect){labelOrigin, labelSize};
+    [self.node.key drawInRect:labelRect withAttributes:attributes];
 }
 
 @end
