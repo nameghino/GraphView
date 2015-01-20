@@ -28,6 +28,15 @@ static NSInteger const kBaseTag = 1041;
 @end
 
 @implementation GraphNodeView
+
+-(instancetype)init {
+    self = [super init];
+    if (self) {
+        self.backgroundColor = [UIColor clearColor];
+    }
+    return self;
+}
+
 @end
 
 @interface GraphView ()
