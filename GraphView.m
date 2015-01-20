@@ -43,7 +43,6 @@ static NSInteger const kBaseTag = 1041;
 @property(nonatomic, strong) id<Graph> graph;
 @property(nonatomic, strong) NSMutableDictionary *nodeViews;
 @property(nonatomic, strong) id<GraphNode> largestNode;
-@property(nonatomic, assign) CGSize largestNodeSize;
 @end
 
 @implementation GraphView
@@ -96,11 +95,11 @@ static NSInteger const kBaseTag = 1041;
         return;
     }
     id<GraphNode> first = [_graph nodeAtIndex:0];
-    [self layoutNode:first atPoint:self.center angle:M_PI * 2.0];
+    [self layoutNode:first atPoint:self.center childrenDirectionAngle:0 areaAngle:2.0 * M_PI];
     [self setNeedsDisplay];
 }
 
--(void) layoutNode:(id<GraphNode>) node atPoint:(CGPoint) point angle:(CGFloat) childrenAngle {
+-(void) layoutNode:(id<GraphNode>) node atPoint:(CGPoint) point childrenDirectionAngle: (CGFloat) childrenDirectionAngle areaAngle:(CGFloat) childrenAngle {
     NSLog(@"Laying out node %@", node.key);
     CGPoint nodeCenter = point;
     CGFloat angleDelta = childrenAngle / node.outDegree;
@@ -120,10 +119,10 @@ static NSInteger const kBaseTag = 1041;
     for (NSString *neighborKey in node.outConnections) {
         id<GraphNode> neighbor = [self.graph nodeForKey:neighborKey];
         CGPoint targetPoint = CGPointFromCenterAngleRadius(nodeCenter,
-                                                           angleDelta * neighborIndex,
+                                                           childrenDirectionAngle + angleDelta * neighborIndex,
                                                            radius + MAX(nodeViewSize.width, nodeViewSize.height));
         
-        [self layoutNode:neighbor atPoint:targetPoint angle:angleDelta];
+        [self layoutNode:neighbor atPoint:targetPoint childrenDirectionAngle:angleDelta * neighborIndex areaAngle:angleDelta];
         neighborIndex++;
     }
 }

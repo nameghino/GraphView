@@ -37,6 +37,7 @@
 @protocol Graph, GraphNode;
 @interface GraphView : UIView
 @property(nonatomic, weak) id<GraphViewDelegate> delegate;
+@property(nonatomic, assign) CGSize largestNodeSize;
 @property(nonatomic, strong) UIColor *connectionColor;
 @property(nonatomic, assign) CGFloat connectionLineWidth;
 -(void) setGraph:(id<Graph>) graph;
