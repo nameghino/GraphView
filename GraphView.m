@@ -95,35 +95,40 @@ static NSInteger const kBaseTag = 1041;
         return;
     }
     id<GraphNode> first = [_graph nodeAtIndex:0];
-    [self layoutNode:first atPoint:self.center childrenDirectionAngle:0 areaAngle:2.0 * M_PI];
+    [self layoutNode:first atPoint:self.center toAngle:0 covering:2.0f * M_PI];
     [self setNeedsDisplay];
 }
 
--(void) layoutNode:(id<GraphNode>) node atPoint:(CGPoint) point childrenDirectionAngle: (CGFloat) childrenDirectionAngle areaAngle:(CGFloat) childrenAngle {
-    NSLog(@"Laying out node %@", node.key);
-    CGPoint nodeCenter = point;
-    CGFloat angleDelta = childrenAngle / node.outDegree;
-    CGFloat radius = node.size * 0.001;
-    CGFloat sizeRatio = node.size / _largestNode.size;
-    
+-(void) layoutNode:(id<GraphNode>) node
+           atPoint:(CGPoint) point toAngle: (CGFloat) toAngle
+         covering:(CGFloat) coverageAngle {
     GraphNodeView *nodeView = _nodeViews[node.key];
-    
+    NSAssert(nodeView, @"target node view not found (?)");
+    CGPoint nodeCenter = point;
+    CGFloat sizeRatio = node.size / _largestNode.size;
     CGSize nodeViewSize = CGSizeMake(_largestNodeSize.width * sizeRatio,
                                      _largestNodeSize.height * sizeRatio);
     nodeView.frame = CGRectMakeWithCenterAndSize(nodeCenter, nodeViewSize);
     
-    NSAssert(nodeView, @"target node view not found (?)");
     
-    
-    NSInteger neighborIndex = 0;
+    if (node.outDegree == 0) { return; }
+    CGFloat distance = node.size * 0.05;
+    CGFloat anglePerNode = coverageAngle / node.outDegree;
+    CGFloat neighborIndex = -coverageAngle / 2.0f;
+    CGFloat neighborIndexDelta = 1;
+
     for (NSString *neighborKey in node.outConnections) {
         id<GraphNode> neighbor = [self.graph nodeForKey:neighborKey];
+        CGFloat angle = toAngle + (neighborIndex * anglePerNode);
+        NSLog(@"\t%@ -> %.05f", neighborKey, angle);
         CGPoint targetPoint = CGPointFromCenterAngleRadius(nodeCenter,
-                                                           childrenDirectionAngle + angleDelta * neighborIndex,
-                                                           radius + MAX(nodeViewSize.width, nodeViewSize.height));
-        
-        [self layoutNode:neighbor atPoint:targetPoint childrenDirectionAngle:angleDelta * neighborIndex areaAngle:angleDelta];
-        neighborIndex++;
+                                                           angle,
+                                                           distance + MAX(nodeViewSize.width, nodeViewSize.height));
+        [self layoutNode:neighbor
+                 atPoint:targetPoint
+                 toAngle:angle
+                covering:anglePerNode];
+        neighborIndex += neighborIndexDelta;
     }
 }
 
