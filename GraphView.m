@@ -70,8 +70,13 @@ static NSInteger const kBaseTag = 1041;
         GraphNodeView *nodeView = [self.delegate graphView:self viewForNode:node];
         nodeView.graphView = self;
         nodeView.tag = kBaseTag + n;
+        UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandler:)];
+        [nodeView addGestureRecognizer:tgr];
         [self addSubview:nodeView];
+
+        
         _nodeViews[node.key] = nodeView;
+        node.view = nodeView;
         
         if (_largestNode) {
             _largestNode = node.size > _largestNode.size ? node : _largestNode;
@@ -94,7 +99,8 @@ static NSInteger const kBaseTag = 1041;
     if ([self.delegate numberOfNodesInGraphView:self] == 0) {
         return;
     }
-    id<GraphNode> first = [_graph nodeAtIndex:0];
+    NSString *rootKey = [self.delegate keyForFirstNodeInGraphView:self];
+    id<GraphNode> first = [_graph nodeForKey:rootKey];
     [self layoutNode:first atPoint:self.center toAngle:0 covering:2.0f * M_PI];
     [self setNeedsDisplay];
 }
@@ -112,7 +118,7 @@ static NSInteger const kBaseTag = 1041;
     
     
     if (node.outDegree == 0) { return; }
-    CGFloat distance = node.size * 0.05;
+    CGFloat distance = 50;
     CGFloat anglePerNode = coverageAngle / node.outDegree;
     CGFloat neighborIndex = -coverageAngle / 2.0f;
     CGFloat neighborIndexDelta = 1;
@@ -151,4 +157,11 @@ static NSInteger const kBaseTag = 1041;
     }
 }
 
+//TODO: work this out without gesture recognizers and measure
+-(void) tapHandler:(UITapGestureRecognizer *)tgr {
+    GraphNodeView *nodeView = (GraphNodeView *)tgr.view;
+    if ([self.delegate respondsToSelector:@selector(graphView:didSelectNode:)]) {
+        [self.delegate graphView:self didSelectNode:nodeView.node];
+    }
+}
 @end

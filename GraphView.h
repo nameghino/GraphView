@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class GraphNodeView;
 @protocol GraphNode <NSObject>
 @property(nonatomic, strong, readonly) NSString *key;
 @property(nonatomic, assign, readonly) NSInteger outDegree;
 @property(nonatomic, assign, readonly) CGFloat size;
 @property(nonatomic, strong, readonly) NSArray *outConnections;
+@property(nonatomic, weak) GraphNodeView *view;
 @end
 
 @protocol Graph <NSObject>
@@ -29,9 +31,12 @@
 
 @class GraphView, GraphNodeView;
 @protocol GraphViewDelegate <NSObject>
+@required
 -(NSInteger) numberOfNodesInGraphView:(GraphView *)graphView;
 -(NSString *) keyForFirstNodeInGraphView:(GraphView *)graphView;
 -(GraphNodeView *) graphView:(GraphView *)graphView viewForNode:(id<GraphNode>) node;
+@optional
+-(void) graphView:(GraphView *)graphView didSelectNode:(id<GraphNode>) node;
 @end
 
 @protocol Graph, GraphNode;
