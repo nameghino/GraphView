@@ -15,6 +15,8 @@
 		35EAAE2A1A6D7B9A00B1825E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 35EAAE281A6D7B9A00B1825E /* LaunchScreen.xib */; };
 		35EAAE361A6D7B9A00B1825E /* GraphViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 35EAAE351A6D7B9A00B1825E /* GraphViewTests.m */; };
 		35EAAE421A6D7C0600B1825E /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35EAAE411A6D7C0600B1825E /* GraphView.m */; };
+		410F4D541A6EE9CF000FBEB9 /* StyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 410F4D531A6EE9CF000FBEB9 /* StyleKit.m */; };
+		410F4D581A6EE9F0000FBEB9 /* BubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 410F4D571A6EE9F0000FBEB9 /* BubbleView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,10 @@
 		35EAAE351A6D7B9A00B1825E /* GraphViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphViewTests.m; sourceTree = "<group>"; };
 		35EAAE401A6D7C0600B1825E /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
 		35EAAE411A6D7C0600B1825E /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
+		410F4D521A6EE9CF000FBEB9 /* StyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleKit.h; sourceTree = "<group>"; };
+		410F4D531A6EE9CF000FBEB9 /* StyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleKit.m; sourceTree = "<group>"; };
+		410F4D561A6EE9F0000FBEB9 /* BubbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubbleView.h; sourceTree = "<group>"; };
+		410F4D571A6EE9F0000FBEB9 /* BubbleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BubbleView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +90,8 @@
 		35EAAE181A6D7B9A00B1825E /* GraphView */ = {
 			isa = PBXGroup;
 			children = (
+				410F4D551A6EE9E0000FBEB9 /* BubbleView */,
+				410F4D511A6EE9BB000FBEB9 /* StyleKit */,
 				35EAAE3F1A6D7BAC00B1825E /* GraphView component */,
 				35EAAE1D1A6D7B9A00B1825E /* AppDelegate.h */,
 				35EAAE1E1A6D7B9A00B1825E /* AppDelegate.m */,
@@ -131,6 +139,24 @@
 			);
 			name = "GraphView component";
 			path = ..;
+			sourceTree = "<group>";
+		};
+		410F4D511A6EE9BB000FBEB9 /* StyleKit */ = {
+			isa = PBXGroup;
+			children = (
+				410F4D521A6EE9CF000FBEB9 /* StyleKit.h */,
+				410F4D531A6EE9CF000FBEB9 /* StyleKit.m */,
+			);
+			name = StyleKit;
+			sourceTree = "<group>";
+		};
+		410F4D551A6EE9E0000FBEB9 /* BubbleView */ = {
+			isa = PBXGroup;
+			children = (
+				410F4D561A6EE9F0000FBEB9 /* BubbleView.h */,
+				410F4D571A6EE9F0000FBEB9 /* BubbleView.m */,
+			);
+			name = BubbleView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,8 +260,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				35EAAE221A6D7B9A00B1825E /* ViewController.m in Sources */,
+				410F4D541A6EE9CF000FBEB9 /* StyleKit.m in Sources */,
 				35EAAE1F1A6D7B9A00B1825E /* AppDelegate.m in Sources */,
 				35EAAE1C1A6D7B9A00B1825E /* main.m in Sources */,
+				410F4D581A6EE9F0000FBEB9 /* BubbleView.m in Sources */,
 				35EAAE421A6D7C0600B1825E /* GraphView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +386,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = GraphView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -368,6 +397,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = GraphView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -427,6 +457,7 @@
 				35EAAE3B1A6D7B9A00B1825E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		35EAAE3C1A6D7B9A00B1825E /* Build configuration list for PBXNativeTarget "GraphViewTests" */ = {
 			isa = XCConfigurationList;
@@ -435,6 +466,7 @@
 				35EAAE3E1A6D7B9A00B1825E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
