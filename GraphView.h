@@ -11,13 +11,21 @@
 @protocol GraphNode <NSObject>
 @property(nonatomic, strong, readonly) NSString *key;
 @property(nonatomic, assign, readonly) NSInteger outDegree;
+@property(nonatomic, assign, readonly) CGFloat size;
+@property(nonatomic, strong, readonly) NSArray *outConnections;
 @end
 
 @protocol Graph <NSObject>
 @property(nonatomic, strong, readonly) NSArray *nodes;
 -(id<GraphNode>) nodeAtIndex:(NSInteger) index;
+-(id<GraphNode>) nodeForKey:(NSString *) key;
 @end
 
+@class GraphView;
+@interface GraphNodeView : UIView
+@property(nonatomic, strong) id<GraphNode> node;
+@property(nonatomic, weak) GraphView *graphView;
+@end
 
 @class GraphView, GraphNodeView;
 @protocol GraphViewDelegate <NSObject>
@@ -26,11 +34,11 @@
 -(GraphNodeView *) graphView:(GraphView *)graphView viewForNode:(id<GraphNode>) node;
 @end
 
-@interface GraphNodeView : UIView
-@end
-
 @protocol Graph, GraphNode;
 @interface GraphView : UIView
 @property(nonatomic, weak) id<GraphViewDelegate> delegate;
+@property(nonatomic, assign) CGSize largestNodeSize;
+@property(nonatomic, strong) UIColor *connectionColor;
+@property(nonatomic, assign) CGFloat connectionLineWidth;
 -(void) setGraph:(id<Graph>) graph;
 @end
