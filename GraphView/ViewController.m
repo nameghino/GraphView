@@ -38,6 +38,8 @@
 @property(nonatomic, assign) CGFloat size;
 @property(nonatomic, strong, readonly) NSString *key;
 @property(nonatomic, strong) NSArray *outConnections;
+@property(nonatomic, weak) GraphNodeView *view;
+
 @end
 
 @implementation TestNode
@@ -82,10 +84,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    CGFloat nodeSideLength = 88.0f;
+    
     GraphView *gv = [[GraphView alloc] init];
     gv.backgroundColor = [UIColor whiteColor];
     gv.connectionColor = [UIColor redColor];
-    gv.largestNodeSize = CGSizeMake(150, 150);
+    gv.largestNodeSize = CGSizeMake(nodeSideLength, nodeSideLength);
     
     _graphView = gv;
     UIView *subview = gv;
@@ -117,7 +122,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated {
-    _graph = [self createGraph];
+    _graph = [self morseGraph];
     _graphView.delegate = self;
     [_graphView setGraph:_graph];
     [_graphView layoutIfNeeded];
@@ -127,6 +132,67 @@
 static NSString * const kNodeKey = @"NodeKey";
 static NSString * const kSizeKey = @"SizeKey";
 static NSString * const kConnectionsKey = @"ConnectionsKey";
+
+-(id<Graph>) morseGraph {
+    NSMutableDictionary *index = [NSMutableDictionary dictionary];
+    for (int i=0; i < 27; ++i) {
+        char key = 'A' + i;
+        NSString *keyString = [NSString stringWithFormat:@"%c", key];
+        TestNode *node = [TestNode nodeWithKey:keyString];
+        index[keyString] = node;
+    }
+    
+    TestNode *root = [TestNode nodeWithKey:@"ROOT"];
+    root.size = 20;
+    
+    NSArray *usedNodes = @[
+                           @{kNodeKey: @"A", kConnectionsKey: @[@"W", @"R"]},
+                           @{kNodeKey: @"B", kConnectionsKey: @[]},
+                           @{kNodeKey: @"C", kConnectionsKey: @[]},
+                           @{kNodeKey: @"D", kConnectionsKey: @[@"X", @"B"]},
+                           @{kNodeKey: @"E", kConnectionsKey: @[@"A", @"I"]},
+                           @{kNodeKey: @"F", kConnectionsKey: @[]},
+                           @{kNodeKey: @"G", kConnectionsKey: @[@"Q", @"Z"]},
+                           @{kNodeKey: @"H", kConnectionsKey: @[]},
+                           @{kNodeKey: @"I", kConnectionsKey: @[@"U", @"S"]},
+                           @{kNodeKey: @"J", kConnectionsKey: @[]},
+                           @{kNodeKey: @"K", kConnectionsKey: @[@"Y", @"C"]},
+                           @{kNodeKey: @"L", kConnectionsKey: @[]},
+                           @{kNodeKey: @"M", kConnectionsKey: @[@"O", @"G"]},
+                           @{kNodeKey: @"N", kConnectionsKey: @[@"K", @"D"]},
+                           @{kNodeKey: @"O", kConnectionsKey: @[]},
+                           @{kNodeKey: @"P", kConnectionsKey: @[]},
+                           @{kNodeKey: @"Q", kConnectionsKey: @[]},
+                           @{kNodeKey: @"R", kConnectionsKey: @[@"L"]},
+                           @{kNodeKey: @"S", kConnectionsKey: @[@"V", @"H"]},
+                           @{kNodeKey: @"T", kConnectionsKey: @[@"M", @"N"]},
+                           @{kNodeKey: @"U", kConnectionsKey: @[@"F"]},
+                           @{kNodeKey: @"V", kConnectionsKey: @[]},
+                           @{kNodeKey: @"W", kConnectionsKey: @[@"J", @"P"]},
+                           @{kNodeKey: @"X", kConnectionsKey: @[]},
+                           @{kNodeKey: @"Y", kConnectionsKey: @[]},
+                           @{kNodeKey: @"Z", kConnectionsKey: @[]},
+                           ];
+    
+    
+    
+    TestGraph *graph = [[TestGraph alloc] init];
+    NSMutableDictionary *d = [NSMutableDictionary dictionary];
+    d[@"ROOT"] = root;
+    
+    [usedNodes enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
+        TestNode *node = index[obj[kNodeKey]];
+        node.outConnections = obj[kConnectionsKey];
+        node.size = 10.0;
+        d[node.key] = node;
+    }];
+    graph.nodeIndex = d;
+    [root connectToNode:graph.nodeIndex[@"E"]];
+    [root connectToNode:graph.nodeIndex[@"T"]];
+    return graph;
+    
+    
+}
 
 -(id<Graph>) createGraph {
     
@@ -144,7 +210,7 @@ static NSString * const kConnectionsKey = @"ConnectionsKey";
     
     
     NSArray *usedNodes = @[
-                           @{kNodeKey: @"A", kSizeKey: @(stdSize * multi1), kConnectionsKey: @[@"B", @"C", @"D"]},
+                           @{kNodeKey: @"A", kSizeKey: @(stdSize), kConnectionsKey: @[@"B", @"C", @"D", @"N"]},
                            @{kNodeKey: @"B", kSizeKey: @(stdSize), kConnectionsKey: @[@"E", @"F", @"G"]},
                            @{kNodeKey: @"C", kSizeKey: @(stdSize), kConnectionsKey: @[@"H", @"I", @"J"]},
                            @{kNodeKey: @"D", kSizeKey: @(stdSize), kConnectionsKey: @[@"K", @"L", @"M"]},
@@ -157,6 +223,7 @@ static NSString * const kConnectionsKey = @"ConnectionsKey";
                            @{kNodeKey: @"K", kSizeKey: @(stdSize * multi2), kConnectionsKey: @[]},
                            @{kNodeKey: @"L", kSizeKey: @(stdSize * multi2) , kConnectionsKey: @[]},
                            @{kNodeKey: @"M", kSizeKey: @(stdSize * multi2), kConnectionsKey: @[]},
+                           @{kNodeKey: @"N", kSizeKey: @(stdSize * multi2), kConnectionsKey: @[]},
                            ];
     
     
@@ -168,7 +235,6 @@ static NSString * const kConnectionsKey = @"ConnectionsKey";
         node.size = [obj[kSizeKey] floatValue];
         node.outConnections = obj[kConnectionsKey];
         d[node.key] = node;
-        NSLog(@"using node:\n%@", node);
     }];
     graph.nodeIndex = d;
     
@@ -186,7 +252,7 @@ static NSString * const kConnectionsKey = @"ConnectionsKey";
 }
 
 -(NSString *)keyForFirstNodeInGraphView:(GraphView *)graphView {
-    return @"A";
+    return @"ROOT";
 }
 
 -(GraphNodeView *)graphView:(GraphView *)graphView viewForNode:(id<GraphNode>)node {
@@ -196,6 +262,10 @@ static NSString * const kConnectionsKey = @"ConnectionsKey";
     nodeView.fillColor = graphView.backgroundColor;
     nodeView.node = node;
     return nodeView;
+}
+
+-(void)graphView:(GraphView *)graphView didSelectNode:(id<GraphNode>)node {
+    NSLog(@"tapped node %@", node.key);
 }
 
 @end
