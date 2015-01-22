@@ -7,6 +7,7 @@
 //
 
 #import "BubbleNodeView.h"
+#import "GraphViewProtocols.h"
 
 @implementation BubbleNodeView
 

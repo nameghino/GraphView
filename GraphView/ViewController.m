@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "GraphView.h"
 #import "BubbleNodeView.h"
+#import "GraphViewProtocols.h"
 
 @interface TestGraph : NSObject <Graph>
 @property(nonatomic, strong) NSMutableDictionary *nodeIndex;
