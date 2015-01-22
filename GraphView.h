@@ -24,22 +24,13 @@
 @end
 
 @class GraphView;
+@protocol GraphNode;
 @interface GraphNodeView : UIView
 @property(nonatomic, strong) id<GraphNode> node;
 @property(nonatomic, weak) GraphView *graphView;
 @end
 
-@class GraphView, GraphNodeView;
-@protocol GraphViewDelegate <NSObject>
-@required
--(NSInteger) numberOfNodesInGraphView:(GraphView *)graphView;
--(NSString *) keyForFirstNodeInGraphView:(GraphView *)graphView;
--(GraphNodeView *) graphView:(GraphView *)graphView viewForNode:(id<GraphNode>) node;
-@optional
--(void) graphView:(GraphView *)graphView didSelectNode:(id<GraphNode>) node;
-@end
-
-@protocol Graph, GraphNode;
+@protocol Graph, GraphNode, GraphViewDelegate, GraphViewLayout;
 @interface GraphView : UIView
 @property(nonatomic, weak) id<GraphViewDelegate> delegate;
 @property(nonatomic, assign) CGSize largestNodeSize;

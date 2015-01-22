@@ -7,6 +7,7 @@
 //
 
 #import "GraphView.h"
+#import "GraphViewProtocols.h"
 
 CGRect CGRectMakeWithCenterAndSize(CGPoint center, CGSize size) {
     CGPoint origin = CGPointMake(center.x - size.width/2.0,
@@ -73,7 +74,7 @@ static NSInteger const kBaseTag = 1041;
         UITapGestureRecognizer *tgr = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapHandler:)];
         [nodeView addGestureRecognizer:tgr];
         [self addSubview:nodeView];
-
+        
         
         _nodeViews[node.key] = nodeView;
         node.view = nodeView;
@@ -107,7 +108,7 @@ static NSInteger const kBaseTag = 1041;
 
 -(void) layoutNode:(id<GraphNode>) node
            atPoint:(CGPoint) point toAngle: (CGFloat) toAngle
-         covering:(CGFloat) coverageAngle {
+          covering:(CGFloat) coverageAngle {
     GraphNodeView *nodeView = _nodeViews[node.key];
     NSAssert(nodeView, @"target node view not found (?)");
     CGPoint nodeCenter = point;
@@ -122,7 +123,7 @@ static NSInteger const kBaseTag = 1041;
     CGFloat anglePerNode = coverageAngle / node.outDegree;
     CGFloat neighborIndex = -coverageAngle / 2.0f;
     CGFloat neighborIndexDelta = 1;
-
+    
     for (NSString *neighborKey in node.outConnections) {
         id<GraphNode> neighbor = [self.graph nodeForKey:neighborKey];
         CGFloat angle = toAngle + (neighborIndex * anglePerNode);
