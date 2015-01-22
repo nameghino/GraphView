@@ -103,8 +103,18 @@ static NSInteger const kBaseTag = 1041;
     }
     NSString *rootKey = [self.delegate keyForFirstNodeInGraphView:self];
     id<GraphNode> first = [_graph nodeForKey:rootKey];
-    [self layoutNode:first atPoint:self.center toAngle:0 covering:2.0f * M_PI];
+    if (self.layoutManager) {
+        [self layoutUsingLayoutManager:first];
+    } else {
+        [self layoutNode:first atPoint:self.center toAngle:0 covering:2.0f * M_PI];
+    }
     [self setNeedsDisplay];
+}
+
+-(void) layoutUsingLayoutManager:(id<GraphNode>) root {
+    for (id<GraphNode> node in self.graph.nodes) {
+        node.view.frame = [self.layoutManager graphView:self rectForNode:node];
+    }
 }
 
 -(void) layoutNode:(id<GraphNode>) node

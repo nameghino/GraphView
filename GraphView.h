@@ -23,7 +23,8 @@ typedef NS_ENUM(NSInteger, GraphLayoutNodeSizeType) {
 @protocol Graph, GraphNode, GraphViewDelegate, GraphViewLayout;
 @interface GraphView : UIView
 @property(nonatomic, weak) id<GraphViewDelegate> delegate;
-@property(nonatomic, assign) CGSize largestNodeSize;
+@property(nonatomic, weak) id<GraphViewLayout> layoutManager;
+
 @property(nonatomic, strong) UIColor *connectionColor;
 @property(nonatomic, assign) CGFloat connectionLineWidth;
 
