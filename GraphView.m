@@ -55,6 +55,7 @@ static NSInteger const kBaseTag = 1041;
         _largestNodeSize = CGSizeMake(100.0f, 100.0f);
         _connectionLineWidth = 3.0f;
         _connectionColor = [UIColor blueColor];
+        _layoutSizeType = kGraphLayoutNodeSizeRelative;
     }
     return self;
 }
@@ -113,8 +114,15 @@ static NSInteger const kBaseTag = 1041;
     NSAssert(nodeView, @"target node view not found (?)");
     CGPoint nodeCenter = point;
     CGFloat sizeRatio = node.size / _largestNode.size;
-    CGSize nodeViewSize = CGSizeMake(_largestNodeSize.width * sizeRatio,
-                                     _largestNodeSize.height * sizeRatio);
+    
+    CGSize nodeViewSize = CGSizeZero;
+    if (self.layoutSizeType == kGraphLayoutNodeSizeRelative) {
+        nodeViewSize = CGSizeMake(_largestNodeSize.width * sizeRatio,
+                                  _largestNodeSize.height * sizeRatio);
+    } else {
+        nodeViewSize = CGSizeMake(node.size, node.size);
+    }
+    
     nodeView.frame = CGRectMakeWithCenterAndSize(nodeCenter, nodeViewSize);
     
     

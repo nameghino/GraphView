@@ -8,20 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class GraphNodeView;
-@protocol GraphNode <NSObject>
-@property(nonatomic, strong, readonly) NSString *key;
-@property(nonatomic, assign, readonly) NSInteger outDegree;
-@property(nonatomic, assign, readonly) CGFloat size;
-@property(nonatomic, strong, readonly) NSArray *outConnections;
-@property(nonatomic, weak) GraphNodeView *view;
-@end
-
-@protocol Graph <NSObject>
-@property(nonatomic, strong, readonly) NSArray *nodes;
--(id<GraphNode>) nodeAtIndex:(NSInteger) index;
--(id<GraphNode>) nodeForKey:(NSString *) key;
-@end
+typedef NS_ENUM(NSInteger, GraphLayoutNodeSizeType) {
+    kGraphLayoutNodeSizeRelative = 0,
+    kGraphLayoutNodeSizeAbsolute = 1
+};
 
 @class GraphView;
 @protocol GraphNode;
@@ -36,5 +26,9 @@
 @property(nonatomic, assign) CGSize largestNodeSize;
 @property(nonatomic, strong) UIColor *connectionColor;
 @property(nonatomic, assign) CGFloat connectionLineWidth;
+
+@property(nonatomic, assign) GraphLayoutNodeSizeType layoutSizeType;
+@property(nonatomic, assign) CGSize largestNodeSize;
+
 -(void) setGraph:(id<Graph>) graph;
 @end
