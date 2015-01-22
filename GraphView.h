@@ -14,6 +14,7 @@
 @property(nonatomic, assign, readonly) NSInteger outDegree;
 @property(nonatomic, assign, readonly) CGFloat size;
 @property(nonatomic, strong, readonly) NSArray *outConnections;
+@property(nonatomic, strong, readonly) NSString *labelText;
 @property(nonatomic, weak) GraphNodeView *view;
 @end
 

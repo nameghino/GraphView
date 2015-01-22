@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "GraphView.h"
 #import "BubbleNodeView.h"
+#import "BubbleView.h"
 
 @interface TestGraph : NSObject <Graph>
 @property(nonatomic, strong) NSMutableDictionary *nodeIndex;
@@ -80,7 +81,6 @@
 
 @implementation ViewController
 
-#define USE_SCROLLVIEW 0
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -94,13 +94,20 @@
     
     _graphView = gv;
     UIView *subview = gv;
+    
+#define USE_SCROLLVIEW 0
+
+
 #if USE_SCROLLVIEW
     UIScrollView *scrollView = [[UIScrollView alloc] init];
     subview = scrollView;
     [scrollView addSubview:gv];
     scrollView.contentSize = CGSizeMake(1000, 1000); //TODO: WTF?
 #endif
+
     [self.view addSubview:subview];
+
+
 #if USE_SCROLLVIEW
     gv.frame = scrollView.bounds;
 #endif
@@ -122,7 +129,9 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated {
+
     _graph = [self morseGraph];
+//    _graph = [self createGraph];
     _graphView.delegate = self;
     [_graphView setGraph:_graph];
     [_graphView layoutIfNeeded];
@@ -143,7 +152,7 @@ static NSString * const kConnectionsKey = @"ConnectionsKey";
     }
     
     TestNode *root = [TestNode nodeWithKey:@"ROOT"];
-    root.size = 20;
+    root.size = 50;
     
     NSArray *usedNodes = @[
                            @{kNodeKey: @"A", kConnectionsKey: @[@"W", @"R"]},
@@ -183,7 +192,7 @@ static NSString * const kConnectionsKey = @"ConnectionsKey";
     [usedNodes enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL *stop) {
         TestNode *node = index[obj[kNodeKey]];
         node.outConnections = obj[kConnectionsKey];
-        node.size = 10.0;
+        node.size = 35.0;
         d[node.key] = node;
     }];
     graph.nodeIndex = d;
@@ -257,10 +266,28 @@ static NSString * const kConnectionsKey = @"ConnectionsKey";
 
 -(GraphNodeView *)graphView:(GraphView *)graphView viewForNode:(id<GraphNode>)node {
     //TODO: add GraphNodeView reuse
+    
+#define NICOS_WAY 0
+    
+#if NICOS_WAY
     BubbleNodeView *nodeView = [[BubbleNodeView alloc] init];
     nodeView.strokeColor = [UIColor blueColor];
     nodeView.fillColor = graphView.backgroundColor;
     nodeView.node = node;
+#else
+    BubbleView *nodeView = [[BubbleView alloc] init];
+    
+    
+    nodeView.strokeColor = [UIColor darkGrayColor];
+    nodeView.fillColor = [UIColor lightGrayColor];
+    nodeView.fontColor = [UIColor blackColor];
+    nodeView.strokeWidth = 3.0f;
+    nodeView.labelText = node.key;
+    nodeView.fontSize = 11.0f;
+    
+    nodeView.node = node;
+#endif
+    
     return nodeView;
 }
 

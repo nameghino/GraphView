@@ -17,6 +17,8 @@
 		35EAAE421A6D7C0600B1825E /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35EAAE411A6D7C0600B1825E /* GraphView.m */; };
 		35EAAE451A6EDB3400B1825E /* BubbleNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35EAAE441A6EDB3400B1825E /* BubbleNodeView.m */; };
 		35EAAE481A6EEB3300B1825E /* BlockNodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 35EAAE471A6EEB3300B1825E /* BlockNodeView.m */; };
+		41D8DC851A6FED3400BF7822 /* StyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D8DC821A6FED3400BF7822 /* StyleKit.m */; };
+		41D8DC861A6FED3400BF7822 /* BubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 41D8DC841A6FED3400BF7822 /* BubbleView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,10 @@
 		35EAAE441A6EDB3400B1825E /* BubbleNodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BubbleNodeView.m; sourceTree = "<group>"; };
 		35EAAE461A6EEB3300B1825E /* BlockNodeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockNodeView.h; sourceTree = "<group>"; };
 		35EAAE471A6EEB3300B1825E /* BlockNodeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockNodeView.m; sourceTree = "<group>"; };
+		41D8DC811A6FED3400BF7822 /* StyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleKit.h; sourceTree = "<group>"; };
+		41D8DC821A6FED3400BF7822 /* StyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleKit.m; sourceTree = "<group>"; };
+		41D8DC831A6FED3400BF7822 /* BubbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BubbleView.h; sourceTree = "<group>"; };
+		41D8DC841A6FED3400BF7822 /* BubbleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BubbleView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +102,7 @@
 				35EAAE201A6D7B9A00B1825E /* ViewController.h */,
 				35EAAE211A6D7B9A00B1825E /* ViewController.m */,
 				35EAAE231A6D7B9A00B1825E /* Main.storyboard */,
+				41D8DC871A6FED3C00BF7822 /* BubbleView */,
 				35EAAE261A6D7B9A00B1825E /* Images.xcassets */,
 				35EAAE281A6D7B9A00B1825E /* LaunchScreen.xib */,
 				35EAAE191A6D7B9A00B1825E /* Supporting Files */,
@@ -141,6 +148,17 @@
 			);
 			name = "GraphView component";
 			path = ..;
+			sourceTree = "<group>";
+		};
+		41D8DC871A6FED3C00BF7822 /* BubbleView */ = {
+			isa = PBXGroup;
+			children = (
+				41D8DC811A6FED3400BF7822 /* StyleKit.h */,
+				41D8DC821A6FED3400BF7822 /* StyleKit.m */,
+				41D8DC831A6FED3400BF7822 /* BubbleView.h */,
+				41D8DC841A6FED3400BF7822 /* BubbleView.m */,
+			);
+			name = BubbleView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,9 +263,11 @@
 			files = (
 				35EAAE481A6EEB3300B1825E /* BlockNodeView.m in Sources */,
 				35EAAE221A6D7B9A00B1825E /* ViewController.m in Sources */,
+				41D8DC851A6FED3400BF7822 /* StyleKit.m in Sources */,
 				35EAAE1F1A6D7B9A00B1825E /* AppDelegate.m in Sources */,
 				35EAAE1C1A6D7B9A00B1825E /* main.m in Sources */,
 				35EAAE451A6EDB3400B1825E /* BubbleNodeView.m in Sources */,
+				41D8DC861A6FED3400BF7822 /* BubbleView.m in Sources */,
 				35EAAE421A6D7C0600B1825E /* GraphView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
