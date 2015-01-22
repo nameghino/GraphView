@@ -21,23 +21,15 @@
 
 
 - (id) init {
-//    self = [super init];
-    
-    strokeColor = [UIColor darkGrayColor];
-    strokeWidth = 3.0f;
-    fillColor = [UIColor lightGrayColor];
-    fontColor = [UIColor blackColor];
-    labelText = [[NSString alloc] init];
-    fontSize = 11.0f;
-    size = CGSizeMake(120.0f, 120.0f);
+    self = [super init];
     
     return self;
 }
 
 - (void)drawRect:(CGRect)rect {
     // Drawing code
-    
-    [StyleKit drawBubbleWithStrokeColor:strokeColor fillColor:fillColor fontColor:fontColor label:labelText fontSize:fontSize strokeWidth:strokeWidth size: size];
+
+    [StyleKit drawBubbleWithStrokeColor:strokeColor fillColor:fillColor fontColor:fontColor label:labelText fontSize:fontSize strokeWidth:strokeWidth size: CGSizeMake(self.frame.size.width, self.frame.size.height) percentage:0.4f];
 }
 
 

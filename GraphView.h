@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GraphViewProtocols.h"
 
 typedef NS_ENUM(NSInteger, GraphLayoutNodeSizeType) {
     kGraphLayoutNodeSizeRelative = 0,

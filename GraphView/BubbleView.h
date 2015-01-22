@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GraphView.h"
 
-@interface BubbleView : UIView
-//[UIColor darkGrayColor] fillColor:[UIColor lightGrayColor] fontColor:[UIColor blackColor] label:@"Hello World" fontSize:18.0f strokeWidth:3.0f
-//size: CGSizeMake(180.0f, 180.0f)];
-//}
+@interface BubbleView : GraphNodeView
+
 
 @property (strong, nonatomic) UIColor *strokeColor;
 @property (strong, nonatomic) UIColor *fillColor;
