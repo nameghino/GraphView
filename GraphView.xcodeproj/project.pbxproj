@@ -30,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		35A0ED1F1A719972002ECC94 /* GraphViewProtocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewProtocols.h; sourceTree = "<group>"; };
 		35EAAE161A6D7B9A00B1825E /* GraphView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GraphView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35EAAE1A1A6D7B9A00B1825E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		35EAAE1B1A6D7B9A00B1825E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -138,6 +139,7 @@
 			children = (
 				35EAAE401A6D7C0600B1825E /* GraphView.h */,
 				35EAAE411A6D7C0600B1825E /* GraphView.m */,
+				35A0ED1F1A719972002ECC94 /* GraphViewProtocols.h */,
 			);
 			name = "GraphView component";
 			path = ..;
