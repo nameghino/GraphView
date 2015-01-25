@@ -1,0 +1,167 @@
+{
+    "nodes": [
+              {"NodeKey":"ROOT",
+              "SizeKey":"200",
+              "name":"Proyecto X",
+              "ConnectionsKey": [
+                              {"NodeKey":"E"},
+                              {"NodeKey":"T"}
+                              ]
+              },
+              {"NodeKey":"A",
+              "SizeKey":"100",
+              "name":"Deliverable A",
+              "ConnectionsKey": [
+                              {"NodeKey":"W"},
+                              {"NodeKey":"R"}
+                              ]
+              },
+              {"NodeKey":"B",
+              "SizeKey":"100",
+              "name":"Deliverable B"
+              },
+              {"NodeKey":"C",
+              "SizeKey":"50",
+              "name":"Deliverable C"
+              },
+              {"NodeKey":"D",
+              "SizeKey":"90",
+              "name":"Deliverable D",
+              "ConnectionsKey": [
+                              {"NodeKey":"X"},
+                              {"NodeKey":"B"}
+                              ]
+              },
+              {"NodeKey":"E",
+              "SizeKey":"50",
+              "name":"Deliverable E",
+              "ConnectionsKey": [
+                              {"NodeKey":"A"},
+                              {"NodeKey":"I"}
+                              ]
+              },
+              {"NodeKey":"F",
+              "SizeKey":"50",
+              "name":"Deliverable F"
+              },
+              {"NodeKey":"G",
+              "SizeKey":"50",
+              "name":"Deliverable G",
+              "ConnectionsKey": [
+                              {"NodeKey":"Q"},
+                              {"NodeKey":"Z"}
+                              ]
+              },
+              {"NodeKey":"H",
+              "SizeKey":"50",
+              "name":"Deliverable H"
+              },
+              {"NodeKey":"I",
+              "SizeKey":"40",
+              "name":"Deliverable I",
+              "ConnectionsKey": [
+                              {"NodeKey":"U"},
+                              {"NodeKey":"S"}
+                              ]
+              },
+              {"NodeKey":"J",
+              "SizeKey":"120",
+              "name":"Deliverable J"
+              },
+              {"NodeKey":"K",
+              "SizeKey":"100",
+              "name":"Deliverable K",
+              "ConnectionsKey": [
+                              {"NodeKey":"Y"},
+                              {"NodeKey":"C"}
+                              ]
+              },
+              {"NodeKey":"L",
+              "SizeKey":"40",
+              "name":"Deliverable L"
+              },
+              {"NodeKey":"M",
+              "SizeKey":"50",
+              "name":"Deliverable M",
+              "ConnectionsKey": [
+                              {"NodeKey":"O"},
+                              {"NodeKey":"G"}
+                              ]
+              },
+              {"NodeKey":"N",
+              "SizeKey":"50",
+              "name":"Deliverable N",
+              "ConnectionsKey": [
+                              {"NodeKey":"K"},
+                              {"NodeKey":"D"}
+                              ]
+              },
+              {"NodeKey":"O",
+              "SizeKey":"50",
+              "name":"Deliverable O"
+              },
+              {"NodeKey":"P",
+              "SizeKey":"50",
+              "name":"Deliverable P"
+              },
+              {"NodeKey":"Q",
+              "SizeKey":"50",
+              "name":"Deliverable Q"
+              },
+              {"NodeKey":"R",
+              "SizeKey":"50",
+              "name":"Deliverable R",
+              "ConnectionsKey": [
+                              {"NodeKey":"L"}
+                              ]
+              },
+              {"NodeKey":"S",
+              "SizeKey":"50",
+              "name":"Deliverable S",
+              "ConnectionsKey": [
+                              {"NodeKey":"V"},
+                              {"NodeKey":"H"}
+                              ]
+              },
+              {"NodeKey":"T",
+              "SizeKey":"50",
+              "name":"Deliverable T",
+              "ConnectionsKey": [
+                              {"NodeKey":"M"},
+                              {"NodeKey":"N"}
+                              ]
+              },
+              {"NodeKey":"U",
+              "SizeKey":"50",
+              "name":"Deliverable U",
+              "ConnectionsKey": [
+                              {"NodeKey":"F"}
+                              ]
+              },
+              {"NodeKey":"V",
+              "SizeKey":"50",
+              "name":"Deliverable V"
+              },
+              {"NodeKey":"W",
+              "SizeKey":"50",
+              "name":"Deliverable W"
+              },
+              {"NodeKey":"X",
+              "SizeKey":"50",
+              "name":"Deliverable X",
+              "ConnectionsKey": [
+                              {"NodeKey":"J"},
+                              {"NodeKey":"P"}
+                              ]
+              },
+              {"NodeKey":"Y",
+              "SizeKey":"50",
+              "name":"Deliverable Y"
+              },
+              {"NodeKey":"Z",
+              "SizeKey":"50",
+              "name":"Deliverable Z"
+              }
+              ]
+    
+}

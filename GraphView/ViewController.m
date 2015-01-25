@@ -83,6 +83,7 @@
 
 @implementation ViewController
 
+NSDictionary *jsonGraph;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -126,13 +127,51 @@
     
     
     
+    NSString *file = [[NSBundle mainBundle] pathForResource:@"graph" ofType:@"json"];
+    NSData *data = [NSData dataWithContentsOfFile:file];
     
+    jsonGraph = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:nil];
     
+}
+
+-(id<Graph>) createJsonGraph {
+    
+    TestGraph *jsonMorseGraph = [[TestGraph alloc] init];
+    
+    NSArray *nodes = [jsonGraph objectForKey:@"nodes"];
+    NSMutableDictionary *nodeIndex = [NSMutableDictionary dictionary];
+    
+    for (int x=0; x < [nodes count];x++) {
+        
+        NSDictionary *currentNode = nodes[x];
+        TestNode *node = [TestNode nodeWithKey:[currentNode objectForKey:kNodeKey]];
+
+        if ([currentNode objectForKey:kConnectionsKey]) {
+            NSMutableArray *outConnections = [[NSMutableArray alloc] init];
+            NSArray *connections = [currentNode objectForKey:kConnectionsKey];
+            
+            for (int z=0; z<[connections count];z++) {
+                [outConnections addObject:[connections[z] objectForKey:kNodeKey]];
+            }
+            node.outConnections = outConnections;
+        } else {
+            node.outConnections = @[];
+        }
+        node.size = [[nodes[x] objectForKey:kSizeKey] floatValue];
+        
+        nodeIndex[node.key] = node;
+        NSLog(@"%@",[nodes[x] objectForKey:@"name"]);
+    }
+    
+    jsonMorseGraph.nodeIndex = nodeIndex;
+    
+    return jsonMorseGraph;
 }
 
 -(void)viewDidAppear:(BOOL)animated {
 
-    _graph = [self morseGraph];
+    _graph = [self createJsonGraph];
+//    _graph = [self morseGraph];
 //    _graph = [self createGraph];
     _graphView.delegate = self;
     [_graphView setGraph:_graph];

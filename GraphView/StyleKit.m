@@ -36,7 +36,7 @@
     CGSize textSize = CGSizeMake(circleSize.width, circleSize.height);
     CGFloat startingAngle = 90;
     CGFloat endingAngle = percentage == 1 ? -270 : (1 - percentage) * 360 + startingAngle;
-    CGFloat progressBarRatio = 0.82;
+    CGFloat progressBarRatio = 0.72;
     CGSize progressBarMaskCircleSize = CGSizeMake(circleSize.width * progressBarRatio, circleSize.height * progressBarRatio);
     CGPoint maskCoordinates = CGPointMake(initialCoordinates.x + (circleSize.width - progressBarMaskCircleSize.width) / 2.0, initialCoordinates.y + (circleSize.height - progressBarMaskCircleSize.height) / 2.0);
 

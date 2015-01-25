@@ -21,6 +21,7 @@
 @property(nonatomic, strong, readonly) NSArray *nodes;
 -(id<GraphNode>) nodeAtIndex:(NSInteger) index;
 -(id<GraphNode>) nodeForKey:(NSString *) key;
+
 @end
 
 @class GraphView, GraphNodeView;
