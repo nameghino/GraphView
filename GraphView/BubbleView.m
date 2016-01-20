@@ -18,6 +18,7 @@
 @synthesize fontColor;
 @synthesize size;
 @synthesize labelText;
+@synthesize percentage;
 
 
 - (id) init {
@@ -29,7 +30,7 @@
 - (void)drawRect:(CGRect)rect {
     // Drawing code
 
-    [StyleKit drawBubbleWithStrokeColor:strokeColor fillColor:fillColor fontColor:fontColor label:labelText fontSize:fontSize strokeWidth:strokeWidth size: CGSizeMake(self.frame.size.width, self.frame.size.height) percentage:0.4f];
+    [StyleKit drawBubbleWithStrokeColor:strokeColor fillColor:fillColor fontColor:fontColor label:labelText fontSize:fontSize strokeWidth:strokeWidth size: CGSizeMake(self.frame.size.width, self.frame.size.height) percentage:percentage];
 }
 
 

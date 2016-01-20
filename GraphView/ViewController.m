@@ -35,9 +35,11 @@
 -(id<GraphNode>)nodeForKey:(NSString *)key {
     return _nodeIndex[key];
 }
+
 @end
 
 @interface TestNode : NSObject <GraphNode>
+
 @property(nonatomic, assign) CGFloat size;
 @property(nonatomic, strong, readonly) NSString *key;
 @property(nonatomic, strong) NSArray *outConnections;
@@ -46,6 +48,38 @@
 @end
 
 @implementation TestNode
+
+@synthesize nodeData;
+
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary {
+    
+    self = [super init];
+    
+    if (self) {
+        
+        if ([dictionary objectForKey:kNodeKey]) {
+            _key = [dictionary objectForKey:kNodeKey];
+        }
+        if ([dictionary objectForKey:kSizeKey]) {
+            _size = [[dictionary objectForKey:kSizeKey] floatValue];
+        }
+
+        if ([dictionary objectForKey:kConnectionsKey]) {
+            NSMutableArray *outConnections = [[NSMutableArray alloc] init];
+            NSArray *connections = [dictionary objectForKey:kConnectionsKey];
+            
+            for (int z=0; z<[connections count];z++) {
+                [outConnections addObject:[connections[z] objectForKey:kNodeKey]];
+            }
+            _outConnections = outConnections;
+        } else {
+            _outConnections = @[];
+        }
+        nodeData = dictionary;
+    }
+    
+    return self;
+}
 
 +(instancetype)nodeWithKey:(NSString *) key {
     return [[self alloc] initWithKey:key];
@@ -144,6 +178,8 @@ NSDictionary *jsonGraph;
     for (int x=0; x < [nodes count];x++) {
         
         NSDictionary *currentNode = nodes[x];
+//        TestNode *node = [[TestNode alloc] init];
+        
         TestNode *node = [TestNode nodeWithKey:[currentNode objectForKey:kNodeKey]];
 
         if ([currentNode objectForKey:kConnectionsKey]) {
@@ -158,6 +194,7 @@ NSDictionary *jsonGraph;
             node.outConnections = @[];
         }
         node.size = [[nodes[x] objectForKey:kSizeKey] floatValue];
+        node.nodeData = nodes[x];
         
         nodeIndex[node.key] = node;
         NSLog(@"%@",[nodes[x] objectForKey:@"name"]);
@@ -179,9 +216,9 @@ NSDictionary *jsonGraph;
 }
 
 
-static NSString * const kNodeKey = @"NodeKey";
-static NSString * const kSizeKey = @"SizeKey";
-static NSString * const kConnectionsKey = @"ConnectionsKey";
+//static NSString * const kNodeKey = @"NodeKey";
+//static NSString * const kSizeKey = @"SizeKey";
+//static NSString * const kConnectionsKey = @"ConnectionsKey";
 
 -(id<Graph>) morseGraph {
     NSMutableDictionary *index = [NSMutableDictionary dictionary];
@@ -325,6 +362,7 @@ static NSString * const kConnectionsKey = @"ConnectionsKey";
     nodeView.strokeWidth = 3.0f;
     nodeView.labelText = node.key;
     nodeView.fontSize = 11.0f;
+    nodeView.percentage = 10.0f;
     
     nodeView.node = node;
 #endif

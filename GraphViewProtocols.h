@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+static NSString * const kNodeKey = @"NodeKey";
+static NSString * const kSizeKey = @"SizeKey";
+static NSString * const kConnectionsKey = @"ConnectionsKey";
 
 @class GraphNodeView;
 @protocol GraphNode <NSObject>
@@ -14,13 +17,16 @@
 @property(nonatomic, assign, readonly) NSInteger outDegree;
 @property(nonatomic, assign, readonly) CGFloat size;
 @property(nonatomic, strong, readonly) NSArray *outConnections;
+@property(nonatomic, strong) NSDictionary *nodeData;
 @property(nonatomic, weak) GraphNodeView *view;
+-(instancetype) initWithDictionary:(NSDictionary *) dictionary;
 @end
 
 @protocol Graph <NSObject>
 @property(nonatomic, strong, readonly) NSArray *nodes;
 -(id<GraphNode>) nodeAtIndex:(NSInteger) index;
 -(id<GraphNode>) nodeForKey:(NSString *) key;
+
 
 @end
 

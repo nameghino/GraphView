@@ -19,5 +19,6 @@
 @property (nonatomic) float fontSize;
 @property (nonatomic) float strokeWidth;
 @property (nonatomic) CGSize size;
+@property (nonatomic) float percentage;
 
 @end
